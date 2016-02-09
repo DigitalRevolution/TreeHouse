@@ -10,14 +10,18 @@
 <!--  <div hello-world></div>     //Inject Directives as HTML attributes -->
   <h1>My TODOS</h1>
   <div ng-controller = "mainCtrl" class = "list"> 
-    <input type = "checkbox"/>
-    <lable class = "editing-label">A sample todo!</lable>
-    <input class = "editing-label" type = "text"/>
-    <div class = "actions"> 
-      <a href ="">edit</a>
-      <a href ="" ng-click = "helloWorld()">save</a>
-      <a class = "delete" href ="">delete</a>
-    </div>
+    <h1 ng-click = "helloWorld()">My TODOs</h1>
+    <div class = "item" ng-repeat = "todo in todos" ng-class = "{'editing': editing, 'edited': todo.edited}">
+      <input ng-model = "todo.complete" type = "checkbox"/>
+      <lable ng-hide = "editing">{{todo.name}}</lable>
+      <input ng-change = "todo.edited = true;" ng-blur = "editing = false;" ng-show = "editing" ng-model = "todo.name" class = "editing-label" type = "text"/>
+      <div class = "actions"> 
+        <a href ="" ng-click = "editing = !editing">edit</a>
+        <a href ="" ng-click = "helloWorld()">save</a>
+        <a class = "delete" href ="">delete</a>
+      </div>
+    </div>   
+      {{todos}}
   </div>  
   <script src="vendor/angular.js" type="text/javascript"></script>
   <script src="scripts/app.js" type="text/javascript"></script>
