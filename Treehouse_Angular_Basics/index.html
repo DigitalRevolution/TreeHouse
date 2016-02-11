@@ -10,15 +10,15 @@
 <!--  <div hello-world></div>     //Inject Directives as HTML attributes -->
   <h1>My TODOS</h1>
   <div ng-controller = "mainCtrl" class = "list"> 
-    <h1 ng-click = "helloWorld()">My TODOs</h1>
+    <div ng-click = "addTodo()" class = "add"><a href = "">+ Add New ToDo</a></div> 
     <div class = "item" ng-repeat = "todo in todos" ng-class = "{'editing': editing, 'edited': todo.edited}">
       <input ng-model = "todo.complete" type = "checkbox"/>
       <lable ng-hide = "editing">{{todo.name}}</lable>
       <input ng-change = "todo.edited = true;" ng-blur = "editing = false;" ng-show = "editing" ng-model = "todo.name" class = "editing-label" type = "text"/>
       <div class = "actions"> 
         <a href ="" ng-click = "editing = !editing">edit</a>
-        <a href ="" ng-click = "helloWorld()">save</a>
-        <a class = "delete" href ="">delete</a>
+        <a href ="" ng-click = "saveTodo(todo)">save</a>
+        <a href ="" ng-click = "deleteTodo(todo, $index)" class = "delete">delete</a>
       </div>
     </div>   
       {{todos}}
