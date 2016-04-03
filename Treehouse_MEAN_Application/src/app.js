@@ -8,6 +8,11 @@ var router = require('./api');
 // Create an instance of the express server
 var app = express(); 
 
+// Require Mongoose 
+require('./database'); 
+// Pull in Seed Data
+require('./seed');
+
 // Configure express to serve files in our public file
 app.use('/', express.static('public'));
 
