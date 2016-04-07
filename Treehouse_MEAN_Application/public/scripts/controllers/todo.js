@@ -3,8 +3,9 @@
 angular.module('todoListApp')
 .controller('todoCtrl', function($scope, dataService) {
   $scope.deleteTodo = function(todo, index) {
-    $scope.todos.splice(index, 1);
-    dataService.deleteTodo(todo);
+    dataService.deleteTodo(todo).then(function(){
+      $scope.todos.splice(index, 1);
+    });
   };
   
   $scope.saveTodos = function() {
