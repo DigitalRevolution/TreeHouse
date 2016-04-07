@@ -19,7 +19,33 @@ router.get('/todos', function(req,res){
 }); 
 
 // TODO: Add a POST route to create new entries
+
+router.post('/todos', function(req, res){
+	var todo = req.body; 
+	Todo.create(todo, function(err, todo){
+		if(err){
+			return res.status(500).json({'err': err.message});
+		}
+		res.json({'todo': todo, message:'Todo Created'}); 
+	})
+});
 // TODO: Add a PUT route to update existing entries
+
+router.put('/todos/:id', function(req, res){
+	var id = req.params.id;
+	var todo = req.body; // this is an empty object for some reason. 
+	console.log(todo._id);   // test todo
+	if(todo && todo._id !== id) {
+		return res.status(500).json({err: "Id's don't match."});
+	}
+	Todo.findByIdAndUpdate(id, todo, {new: true}, function(err, todo){
+		if(err){
+			return res.status(500).json({err: err.message});
+		}
+		res.json({'todo': todo, message:'Todo Updated.'}); 
+	})
+});
+
 // TODO: Add a DELETE route to delete entries
 
 module.exports = router; 
